@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shoot : MonoBehaviour {
+public class Bullet : MonoBehaviour {
+    public float expireTime;
 
 	// Use this for initialization
 	void Start () {
-		
+        Destroy(gameObject, expireTime);
 	}
 	
 	// Update is called once per frame
