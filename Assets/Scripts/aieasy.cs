@@ -83,18 +83,11 @@ public class aieasy : MonoBehaviour
     //collison detection
     private void OnCollisionEnter(Collision collision)
     {
-        //if enemy collides with player, respawn
         if (collision.gameObject.name == "PlayerMain")
         {
             respawnEnemy();
         }
-        if (collision.gameObject.name == "Bullet(Clone)")
-        {
-            respawnEnemy();
-            print("Enemy Hit! Good job.");
-        }
     }
-    
     //repsawn function
     private void respawnEnemy()
     {

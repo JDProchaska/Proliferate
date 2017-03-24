@@ -8,7 +8,6 @@ public class Shoot1 : MonoBehaviour {
     public float moveForce = 0f;
     public float shootRate = 0f;
     public float shootForce = 0f;
-    public float maxShootDistance = 0f;
     private float shootRateTimeStamp = 0f;
 
     public GameObject bullet;
@@ -27,18 +26,12 @@ public class Shoot1 : MonoBehaviour {
 
         rbody.velocity = new Vector3(h,v,0);
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
-            Debug.DrawLine(gun.position, gun.forward);
-            Ray ray = new Ray(gun.position, gun.forward);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, maxShootDistance))
-            {
-                print("HIT THE BITCH");
-            }
             print("SHOT FIRES");
-            
+            GameObject go = (GameObject)Instantiate(bullet, gun.position, gun.rotation);
+            go.GetComponent<Rigidbody>().AddForce(gun.forward * shootForce);
+            shootRateTimeStamp = Time.time + shootRate;
         }
     }
 }
