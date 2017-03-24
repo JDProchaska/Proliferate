@@ -12,6 +12,7 @@ public class aieasy : MonoBehaviour
     public float enemyMovementSpeed;
     public float damping;
     public Transform fpsTarget;
+    public GameObject enemyPrefab;
 
     Rigidbody theRigidBody;
     Renderer myRender;
@@ -109,13 +110,20 @@ public class aieasy : MonoBehaviour
     {
         //declaring respawn vars and setting random values
         Vector3 respawn;
+        Vector3 duplicateRespawn;
         int randX = Random.Range(50, 400);
         int randY = Random.Range(1, 2);
         int randZ = Random.Range(50, 400);
+        int randX2 = Random.Range(50, 400);
+        int randY2 = Random.Range(1, 2);
+        int randZ2 = Random.Range(50, 400);
         //putting random values into the Vector3 respawn item
         respawn.x = randX;
         respawn.y = randY;
         respawn.z = randZ;
+        duplicateRespawn.x = randX2;
+        duplicateRespawn.y = randY2;
+        duplicateRespawn.z = randZ2;
         //set velocity to 0
         theRigidBody.velocity = new Vector3(0, 0, 0);
 
@@ -123,6 +131,10 @@ public class aieasy : MonoBehaviour
         transform.position = respawn;
         transform.rotation = fpsTarget.rotation;
         didRespawn = true;
+
+        //Spawn Another Enemy
+        Quaternion rotation = Quaternion.LookRotation(fpsTarget.position - transform.position);
+        GameObject go = (GameObject)Instantiate(enemyPrefab, duplicateRespawn, rotation);
     }
 }
 
