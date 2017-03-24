@@ -29,7 +29,7 @@ public class Shoot1 : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Debug.DrawLine(gun.position, gun.forward * maxShootDistance, Color.red);
+            Debug.DrawLine(gun.position, gun.forward);
             Ray ray = new Ray(gun.position, gun.forward);
             RaycastHit hit;
 
