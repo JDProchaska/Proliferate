@@ -2,31 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shoot1 : MonoBehaviour {
-
-    public Rigidbody rbody;
+public class Shoot1 : MonoBehaviour
+{
+    
     public float moveForce = 0f;
     public float shootRate = 0f;
     public float shootForce = 0f;
     private float shootRateTimeStamp = 0f;
 
-    public GameObject bullet;
-    public Transform gun;
-    
-	// Use this for initialization
-	void Start () {
-        rbody.GetComponent<Rigidbody>();
+        public GameObject bullet;
+        public Transform gun;
 
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        float h = Input.GetAxisRaw("Horizontal") * moveForce;
-        float v = Input.GetAxisRaw("Vertical") * moveForce;
+        // Use this for initialization
+    void Start()
+    {
+        
+    }
+    void Update()
+    {
 
-        rbody.velocity = new Vector3(h,v,0);
 
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             print("SHOT FIRES");
             GameObject go = (GameObject)Instantiate(bullet, gun.position, gun.rotation);

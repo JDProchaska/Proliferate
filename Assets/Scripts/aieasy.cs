@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class aieasy : MonoBehaviour
 {
 
@@ -67,25 +68,40 @@ public class aieasy : MonoBehaviour
         }
 
 
+        RaycastHit hit = new RaycastHit();
+
+        if (hit.collider)
+        {
+            respawnEnemy();
+        }
+
+
     }
     //look at player function
-    void lookAtPlayer()
+    public void lookAtPlayer()
     {
         Quaternion rotation = Quaternion.LookRotation(fpsTarget.position - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime + damping);
     }
     //attack player function
-    void attackPlease()
+    public void attackPlease()
     {
         theRigidBody.transform.forward.Set(0, 0, 1);
         theRigidBody.AddForce(transform.forward * enemyMovementSpeed);
     }
+
     //collison detection
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "PlayerMain")
         {
             respawnEnemy();
+            print("Player hit!");
+        }
+        if (collision.gameObject.name == "Bullet(Clone)")
+        {
+            respawnEnemy();
+            print("ENEMY HIT OMG DUDE");
         }
     }
     //repsawn function
@@ -100,21 +116,13 @@ public class aieasy : MonoBehaviour
         respawn.x = randX;
         respawn.y = randY;
         respawn.z = randZ;
+        //set velocity to 0
+        theRigidBody.velocity = new Vector3(0, 0, 0);
 
-        /* working on respawn distance checker
-        do
-        {
-            distance = Vector3.Distance(player.position, transform.position);
-            randX = Random.Range(50, 400);
-            randZ = Random.Range(50, 400);
-            respawn.x = randX;
-            respawn.z = randZ;
-        } while (distance < 20);
-        */
         //respawn, look at player, print to console to say player hit and also set bool to true for repsawn distance checking
         transform.position = respawn;
         transform.rotation = fpsTarget.rotation;
-        print("Player hit!");
         didRespawn = true;
     }
 }
+
