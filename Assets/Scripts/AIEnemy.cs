@@ -89,7 +89,15 @@ public class AIEnemy : MonoBehaviour
     //attack player function
     public void attackPlease(Transform enemyPos, Transform playerPos)
     {
-        enemyPos.Translate(0, 0, enemyMovementSpeed);
+        if(Time.timeScale == 0)
+        {
+            //do nothing
+        }
+        //enemy movement - more smooth than rigidbody forces.
+        else
+            enemyPos.Translate(0, 0, enemyMovementSpeed);
+        //adding pause stop ability with time.
+
     }
 
     //collison detection
