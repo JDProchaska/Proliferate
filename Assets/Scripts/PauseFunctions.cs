@@ -1,43 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
-
-public class PauseFunctions : MonoBehaviour
+namespace ProLifeRate
 {
-    public GameObject pauseMenu;
-    public GameObject player;
-
-    // Update is called once per frame
-    void Update()
+    public class PauseFunctions : MonoBehaviour
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pauseGame();
-        }
-    }
+        public GameObject pauseMenu;
+        public GameObject player;
+        
 
-    public void pauseGame()
-    {
-        if (pauseMenu.activeInHierarchy)
+        // Update is called once per frame
+        void Update()
         {
-            pauseMenu.SetActive(false);
-            Time.timeScale = 1;
-            player.GetComponent<FirstPersonController>().enabled = true;
-            player.GetComponent<Shoot1>().enabled = true;
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                pauseGame();
+            }
         }
-        else
+
+        public void pauseGame()
         {
-            pauseMenu.SetActive(true);
+            if (pauseMenu.activeInHierarchy)
+            {
+                pauseMenu.SetActive(false);
+                Time.timeScale = 1;
+                player.GetComponent<FirstPersonController>().enabled = true;
+                player.GetComponent<Shoot1>().enabled = true;
+            }
+            else
+            {
+                pauseMenu.SetActive(true);
+                Time.timeScale = 0;
+                player.GetComponent<FirstPersonController>().enabled = false;
+                player.GetComponent<Shoot1>().enabled = false;
+
+            }
+
+        }
+        public void exitGame()
+        {
+            Application.Quit();
+        }
+        public void playerDeath()
+        {
             Time.timeScale = 0;
             player.GetComponent<FirstPersonController>().enabled = false;
             player.GetComponent<Shoot1>().enabled = false;
-            
         }
-
-    }
-    public void exitGame()
-    {
-        Application.Quit();
+        public void restartGame()
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
