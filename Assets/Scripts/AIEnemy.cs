@@ -27,6 +27,7 @@ public class AIEnemy : MonoBehaviour
     {
         myRender = GetComponent<Renderer>();
         theRigidBody = GetComponent<Rigidbody>();
+        myRender.material.color = Color.red;
     }
 
     // Update is called once per frame
@@ -43,18 +44,6 @@ public class AIEnemy : MonoBehaviour
             lookAtPlayer();
             attackPlease(enemyTransform, fpsTarget);
             print("ATTACK");
-        }
-        //if player within look distance
-        else if (fpsTargetDistance < enemyLookDistance)
-        {
-            //change color and look at player
-            myRender.material.color = Color.yellow;
-            lookAtPlayer();
-        }
-        else
-        {
-            //change color
-            myRender.material.color = Color.blue;
         }
         //if just respawned and spawn too close
         if (fpsTargetDistance < 20 && didRespawn)

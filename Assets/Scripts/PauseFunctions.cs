@@ -32,6 +32,7 @@ public class PauseFunctions : MonoBehaviour
             Time.timeScale = 0;
             player.GetComponent<FirstPersonController>().enabled = false;
             player.GetComponent<Shoot1>().enabled = false;
+            
         }
 
     }
