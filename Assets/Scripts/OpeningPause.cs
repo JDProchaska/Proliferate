@@ -21,24 +21,38 @@ namespace ProLifeRate
 
             if (time > 6.017)
             {
-                player.GetComponent<FirstPersonController>().enabled = true;
-                player.GetComponent<Shoot1>().enabled = true;
-                playerCamera.GetComponent<Camera>().enabled = true;
-                enemy.GetComponent<AIEnemy>().enabled = true;
-                cutsceneCamera.GetComponent<AudioListener>().enabled = false;
-                UI.SetActive(true);
-                cutsceneCamera.GetComponent<Animator>().Stop();
-                GetComponent<OpeningPause>().enabled = false;
+                AfterStart();
             }
             else
             {
-                player.GetComponent<FirstPersonController>().enabled = false;
-                player.GetComponent<Shoot1>().enabled = false;
-                playerCamera.GetComponent<Camera>().enabled = false;
-                enemy.GetComponent<AIEnemy>().enabled = false;
-                UI.SetActive(false);
+                BeforeStart();
             }
 
+        }
+        public void BeforeStart()
+        {
+            player.GetComponent<FirstPersonController>().enabled = false;
+            player.GetComponent<Shoot1>().enabled = false;
+            playerCamera.GetComponent<Camera>().enabled = false;
+            enemy.GetComponent<AIEnemy>().enabled = false;
+            UI.SetActive(false);
+
+        }
+        public void AfterStart()
+        {
+            player.GetComponent<FirstPersonController>().enabled = true;
+            player.GetComponent<Shoot1>().enabled = true;
+            playerCamera.GetComponent<Camera>().enabled = true;
+            enemy.GetComponent<AIEnemy>().enabled = true;
+            cutsceneCamera.GetComponent<AudioListener>().enabled = false;
+            UI.SetActive(true);
+            cutsceneCamera.GetComponent<Animator>().Stop();
+            GetComponent<OpeningPause>().enabled = false;
+
+        }
+        public void StartCutSceneCamera()
+        {
+            cutsceneCamera.GetComponent<Animator>().StartPlayback();
         }
     }
 }

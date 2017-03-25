@@ -28,6 +28,10 @@ namespace ProLifeRate
                 Time.timeScale = 1;
                 player.GetComponent<FirstPersonController>().enabled = true;
                 player.GetComponent<Shoot1>().enabled = true;
+                if (Time.timeScale != 0)
+                {
+                    Cursor.visible = false;
+                }
             }
             else
             {
@@ -35,12 +39,14 @@ namespace ProLifeRate
                 Time.timeScale = 0;
                 player.GetComponent<FirstPersonController>().enabled = false;
                 player.GetComponent<Shoot1>().enabled = false;
+                Cursor.visible = true;
 
             }
 
         }
         public void exitGame()
         {
+            print("Game Exited");
             Application.Quit();
         }
         public void playerDeath()
@@ -48,10 +54,14 @@ namespace ProLifeRate
             Time.timeScale = 0;
             player.GetComponent<FirstPersonController>().enabled = false;
             player.GetComponent<Shoot1>().enabled = false;
+            Cursor.visible = true;
         }
         public void restartGame()
         {
+            print("Game Restarted");
+            Cursor.visible = false;
             SceneManager.LoadScene(0);
+            GetComponent<OpeningPause>().StartCutSceneCamera();
         }
     }
 }
