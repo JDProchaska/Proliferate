@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class aieasy : MonoBehaviour
+public class AIEnemy : MonoBehaviour
 {
 
     public float fpsTargetDistance;
@@ -14,6 +14,7 @@ public class aieasy : MonoBehaviour
     public Transform fpsTarget;
     public GameObject enemyPrefab;
 
+    Transform enemyTransform;
     Rigidbody theRigidBody;
     Renderer myRender;
 
@@ -33,13 +34,14 @@ public class aieasy : MonoBehaviour
     {
         //calculate distance from player
         fpsTargetDistance = Vector3.Distance(fpsTarget.position, transform.position);
+        enemyTransform = GetComponent<Transform>();
         //if player is within attack distance
         if (fpsTargetDistance < attackDistance)
         {
             //change color and attack
             myRender.material.color = Color.red;
             lookAtPlayer();
-            attackPlease();
+            attackPlease(enemyTransform, fpsTarget);
             print("ATTACK");
         }
         //if player within look distance
@@ -85,10 +87,9 @@ public class aieasy : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime + damping);
     }
     //attack player function
-    public void attackPlease()
+    public void attackPlease(Transform enemyPos, Transform playerPos)
     {
-        theRigidBody.transform.forward.Set(0, 0, 1);
-        theRigidBody.AddForce(transform.forward * enemyMovementSpeed);
+        enemyPos.Translate(0, 0, enemyMovementSpeed);
     }
 
     //collison detection
@@ -133,8 +134,9 @@ public class aieasy : MonoBehaviour
         didRespawn = true;
 
         //Spawn Another Enemy
-        Quaternion rotation = Quaternion.LookRotation(fpsTarget.position - transform.position);
-        GameObject go = (GameObject)Instantiate(enemyPrefab, duplicateRespawn, rotation);
+        Quaternion enemyLookRespawn = new Quaternion();
+        enemyLookRespawn.SetLookRotation(fpsTarget.position);
+        GameObject go = (GameObject)Instantiate(enemyPrefab, duplicateRespawn, enemyLookRespawn);
     }
 }
 
