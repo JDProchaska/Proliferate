@@ -24,6 +24,7 @@ public class OpeningPause : MonoBehaviour {
             enemy.GetComponent<AIEnemy>().enabled = true;
             cutsceneCamera.GetComponent<AudioListener>().enabled = false;
             UI.SetActive(true);
+            cutsceneCamera.GetComponent<Animator>().Stop();
             GetComponent<OpeningPause>().enabled = false;
         }
         else
