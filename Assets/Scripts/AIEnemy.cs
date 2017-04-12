@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 namespace ProLifeRate
@@ -14,6 +15,7 @@ namespace ProLifeRate
         public float damping;
         public Transform fpsTarget;
         public GameObject enemyPrefab;
+        public GameObject EventSystem;
 
         Transform enemyTransform;
         Rigidbody theRigidBody;
@@ -26,6 +28,7 @@ namespace ProLifeRate
         // Use this for initialization
         void Start()
         {
+            //initializing random items
             myRender = GetComponent<Renderer>();
             theRigidBody = GetComponent<Rigidbody>();
             myRender.material.color = Color.red;
@@ -47,7 +50,7 @@ namespace ProLifeRate
                 print("ATTACK");
             }
             //if just respawned and spawn too close
-            if (fpsTargetDistance < 20 && didRespawn)
+            if (fpsTargetDistance < 100 && didRespawn)
             {
                 //spawan again and print to console
                 print("TOO CLOSE");
@@ -60,13 +63,6 @@ namespace ProLifeRate
                 didRespawn = false;
             }
 
-
-            RaycastHit hit = new RaycastHit();
-
-            if (hit.collider)
-            {
-                respawnEnemy();
-            }
 
 
         }
@@ -135,6 +131,10 @@ namespace ProLifeRate
             Quaternion enemyLookRespawn = new Quaternion();
             enemyLookRespawn.SetLookRotation(fpsTarget.position);
             GameObject go = (GameObject)Instantiate(enemyPrefab, duplicateRespawn, enemyLookRespawn);
+
+            //add a counter to the enemy counter and refresh the ui
+            EventSystem.GetComponent<EnemyCounter>().countEnemies(1);
+            
         }
     }
 }
