@@ -16,9 +16,14 @@ namespace ProLifeRate
 
         public void OnCollisionEnter(Collision collision)
         {
-            deathScreen.SetActive(true);
-            print("DEAD!");
-            gameController.GetComponent<PauseFunctions>().playerDeath();
+            if (collision.gameObject.name == "Enemy" || collision.gameObject.name == "Enemy(Clone)")
+            {
+                deathScreen.SetActive(true);
+                print("DEAD!");
+                gameController.GetComponent<PauseFunctions>().playerDeath();
+            }
+
+
         }
         
 

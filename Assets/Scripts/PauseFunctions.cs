@@ -54,7 +54,6 @@ namespace ProLifeRate
             Time.timeScale = 0;
             player.GetComponent<FirstPersonController>().enabled = false;
             player.GetComponent<Shoot1>().enabled = false;
-            Cursor.visible = true;
         }
         public void restartGame()
         {

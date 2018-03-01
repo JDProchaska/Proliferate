@@ -81,7 +81,9 @@ namespace ProLifeRate
             }
             //enemy movement - more smooth than rigidbody forces.
             else
-                enemyPos.Translate(0, 0, enemyMovementSpeed);
+            {
+                enemyPos.Translate(0 , 0 , enemyMovementSpeed);
+            }
             //adding pause stop ability with time.
 
         }
@@ -91,6 +93,7 @@ namespace ProLifeRate
         {
             if (collision.gameObject.name == "PlayerMain")
             {
+                Cursor.visible = true;
                 respawnEnemy();
                 print("Player hit!");
             }
@@ -107,10 +110,10 @@ namespace ProLifeRate
             Vector3 respawn;
             Vector3 duplicateRespawn;
             int randX = Random.Range(50, 400);
-            int randY = Random.Range(1, 2);
+            int randY = Random.Range(20, 40);
             int randZ = Random.Range(50, 400);
             int randX2 = Random.Range(50, 400);
-            int randY2 = Random.Range(1, 2);
+            int randY2 = Random.Range(20, 40);
             int randZ2 = Random.Range(50, 400);
             //putting random values into the Vector3 respawn item
             respawn.x = randX;
