@@ -46,7 +46,7 @@ namespace ProLifeRate
             enemy.GetComponent<AIEnemy>().enabled = true;
             cutsceneCamera.GetComponent<AudioListener>().enabled = false;
             UI.SetActive(true);
-            cutsceneCamera.GetComponent<Animator>().Stop();
+            cutsceneCamera.GetComponent<Animator>().StopPlayback();
             GetComponent<OpeningPause>().enabled = false;
 
         }
